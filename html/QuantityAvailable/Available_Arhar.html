@@ -252,7 +252,7 @@
             <div class="card-body">
               <h5 class="card-title">Report</h5>
                     <div id="reportsChart"></div>
-                    <script>
+                    <!-- <script>
                       document.addEventListener("DOMContentLoaded", () => {
                         new ApexCharts(document.querySelector("#reportsChart"), {
                           series: [{
@@ -303,7 +303,7 @@
                           }
                         }).render();
                       });
-                    </script>
+                    </script> -->
                     <!-- End Line Chart -->
             </div>
           </div>
@@ -347,6 +347,53 @@
   <script src="../../assets/js/jquery.min.js"></script>
   <script src="../../assets/js/papaparse.min.js"></script>
   <script>
+    function loadChartData() {
+            // Path to your CSV file
+            var csvFilePath = 'your_file.csv';
+
+            // Parse CSV data
+            Papa.parse(csvFilePath, {
+                header: true,
+                download: true,
+                complete: function (results) {
+                    // Format data for ApexCharts
+                    var series = Object.keys(results.data[0]).map(function (header) {
+                        return {
+                            name: header,
+                            data: results.data.map(function (row) {
+                                return parseFloat(row[header]);
+                            })
+                        };
+                    });
+
+                    // Create ApexCharts instance
+                    var chart = new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: series,
+                        chart: {
+                            type: 'line',
+                            height: 350,
+                            zoom: {
+                                enabled: false
+                            }
+                        },
+                        xaxis: {
+                            categories: results.data.map(function (row) {
+                                return row['Category']; // Change 'Category' to your x-axis field
+                            })
+                        },
+                        title: {
+                            text: 'CSV Data to ApexCharts'
+                        }
+                    });
+
+                    // Render the chart
+                    chart.render();
+                }
+            });
+        }
+
+        // Call the function to load data and create chart
+    loadChartData();
     $(document).ready(function () {
         // Path to your CSV file
         var csvFilePath = '../../Data/QuantityAvailable/Book1.csv';
