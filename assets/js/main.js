@@ -328,3 +328,54 @@
   }
 
 })();
+
+function loadCSVData(csvFilePath,xaxisdata) {
+  Papa.parse(csvFilePath, {
+      header: true,
+      download: true,
+      complete: function (results) {
+      var headers = Object.keys(results.data[0]);
+      // Load Chart
+      var series = headers.map(function (header) {
+          return {
+              name: header,
+              data: results.data.map(function (row) {
+                  return parseFloat(row[header]);
+              })
+          };
+      });
+      var chart = new ApexCharts(document.querySelector("#reportsChart"), {
+          series: series,
+          chart: {
+              type: 'line',
+              height: 350,
+              zoom: {
+                  enabled: false
+              }
+          },
+          xaxis: {
+              categories: results.data.map(function (row) {
+                  return row[xaxisdata]; 
+              })
+          },
+      });
+      chart.render();
+
+      // Load Table
+      var tableHeaders = headers.map(function (header) {
+        return '<th>' + header + '</th>';
+      });
+      $('#myTable thead tr').html(tableHeaders);
+      var tableRows = results.data.map(function (row) {
+          var rowData = headers.map(function (header) {
+              return '<td>' + row[header] + '</td>';
+          });
+          return '<tr>' + rowData.join('') + '</tr>';
+      });
+      $('#myTable tbody').html(tableRows);
+      new DataTable('#myTable', {
+        responsive: true
+      });
+      }
+  });
+}
