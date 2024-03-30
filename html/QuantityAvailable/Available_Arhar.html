@@ -18,6 +18,8 @@
   <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../../assets/vendor/simple-datatables/datatables.min.css" rel="stylesheet">
   <link href="../../assets/css/style.css" rel="stylesheet">
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/vendor/simple-datatables/datatables.min.js"></script>
 </head>
 
 <body>
@@ -338,11 +340,9 @@
   <script src="../../assets/vendor/chart.js/chart.umd.js"></script>
   <script src="../../assets/vendor/echarts/echarts.min.js"></script>
   <script src="../../assets/vendor/quill/quill.min.js"></script>
-  <script src="../../assets/vendor/simple-datatables/datatables.min.js"></script>
   <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="../../assets/vendor/php-email-form/validate.js"></script>
   <script src="../../assets/js/main.js"></script>
-  <script src="../../assets/js/jquery.min.js"></script>
   <script src="../../assets/js/papaparse.min.js"></script>
   <script>
     $(document).ready(function () {
@@ -350,8 +350,7 @@
         var csvFilePath = '../../Data/QuantityAvailable/Book1.csv';
         // x-axis data for chart
         var xaxisdata = 'Produce';
-        loadCSVData(csvFilePath,xaxisdata,'Line');
-        $('#myTable').DataTable();
+        loadCSVData(csvFilePath,xaxisdata);
     });
 </script>
 </body>

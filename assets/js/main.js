@@ -306,7 +306,7 @@
 
 })();
 
-function loadCSVData(csvFilePath,xaxisdata,chartType) {
+function loadCSVData(csvFilePath,xaxisdata) {
   Papa.parse(csvFilePath, {
       header: true,
       download: true,
@@ -324,7 +324,7 @@ function loadCSVData(csvFilePath,xaxisdata,chartType) {
       var chart = new ApexCharts(document.querySelector("#reportsChart"), {
           series: series,
           chart: {
-              type: chartType,
+              type: 'Line',
               height: 350,
               zoom: {
                   enabled: false
@@ -350,6 +350,7 @@ function loadCSVData(csvFilePath,xaxisdata,chartType) {
           return '<tr>' + rowData.join('') + '</tr>';
       });
       $('#myTable tbody').html(tableRows);
+      $('#myTable').DataTable();
       }
   });
 }
