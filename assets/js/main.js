@@ -306,7 +306,7 @@
 
 })();
 
-function loadCSVData(csvFilePath,xaxisdata) {
+function loadCSVData(csvFilePath,xaxisdata,chartType) {
   Papa.parse(csvFilePath, {
       header: true,
       download: true,
@@ -324,7 +324,7 @@ function loadCSVData(csvFilePath,xaxisdata) {
       var chart = new ApexCharts(document.querySelector("#reportsChart"), {
           series: series,
           chart: {
-              type: 'line',
+              type: chartType,
               height: 350,
               zoom: {
                   enabled: false
