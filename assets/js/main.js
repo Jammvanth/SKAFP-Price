@@ -289,29 +289,6 @@
       }, false)
     })
 
-  /**
-   * Initiate Datatables
-   */
-  const datatables = select('.datatable', true)
-  datatables.forEach(datatable => {
-    new simpleDatatables.DataTable(datatable, {
-      perPageSelect: [5, 10, 15, ["All", -1]],
-      columns: [{
-          select: 2,
-          sortSequence: ["desc", "asc"]
-        },
-        {
-          select: 3,
-          sortSequence: ["desc"]
-        },
-        {
-          select: 4,
-          cellClass: "green",
-          headerClass: "red"
-        }
-      ]
-    });
-  })
 
   /**
    * Autoresize echart charts
@@ -373,9 +350,6 @@ function loadCSVData(csvFilePath,xaxisdata) {
           return '<tr>' + rowData.join('') + '</tr>';
       });
       $('#myTable tbody').html(tableRows);
-      new DataTable('#myTable', {
-        responsive: true
-      });
       }
   });
 }
